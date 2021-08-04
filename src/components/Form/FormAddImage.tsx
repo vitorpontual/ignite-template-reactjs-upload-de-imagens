@@ -22,15 +22,22 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
   const [localImageUrl, setLocalImageUrl] = useState('');
   const toast = useToast();
 
+  const acceptedFormatsRegex =  /(?:([^:/?#]+):)?(?:([^/?#]*))?([^?#](?:jpg|jpeg|gif|png))(?:\?([^#]*))?(?:#(.*))?/g;
 
-
-  const acceptedFormatsRegex =  /(?:([^:/?#]+):)?(?:([^/?#]*))?([^?#](?:jpeg|gif|png))(?:\?([^#]*))?(?:#(.*))?/g;
 
   const formValidations = {
     image: {
       require: 'Arquivo obrigatório',
       validate: {
-        lessThan10MB: fileList => fileList[0].size < 1000000 || 'O arquivo deve ser menor que 10MB',
+        lessThan10MB: fileList => fileList[0].size < 10000000 || 'O arquivo deve ser menor que 10MB',
+        // lessThan10MB: (fileList) => {
+        //   if (fileList[0].size < 10000000){
+        //     return console.log(fileList)
+
+        //   } else {
+        //     return  'O arquivo deve ser menor que 10MB'
+        //   }
+        // },
         acceptedFormats: fileList => acceptedFormatsRegex.test(fileList[0].type) || 'Somento são aceitos arquivos PNG, JPG e GIF'
       }
     },
@@ -53,6 +60,7 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
       }
     },
   };
+
 
   const queryClient = useQueryClient();
   const mutation = useMutation(
