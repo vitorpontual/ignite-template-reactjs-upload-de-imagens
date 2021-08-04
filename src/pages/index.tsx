@@ -22,14 +22,16 @@ interface GetImagesResponse {
 }
 
 export default function Home(): JSX.Element {
-  async function fetchImages({ pageParam = 0 }): Promise<GetImagesResponse> {
-    const { data } = await api('api/images', {
+  async function fetchImages({ pageParam = null }): Promise<GetImagesResponse> {
+    const { data } = await api.get('/api/images', {
       params: {
         after: pageParam,
       },
     });
     return data;
   }
+
+  
 
   const {
     data,
@@ -63,6 +65,7 @@ export default function Home(): JSX.Element {
 
       <Box maxW={1120} px={[10, 15, 20]} mx="auto" my={[10, 15, 20]}>
         <CardList cards={formattedData} />
+        
 
         {hasNextPage && (
           <Button onClick={() => fetchNextPage()} disabled={isFetchingNextPage}>

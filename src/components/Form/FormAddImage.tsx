@@ -24,7 +24,7 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
 
 
 
-  const acceptedFormatsRegex = /(?:([^:\?#]+):)?(?:\\([^\?#]*))?([^?#]*\.(?:jpg|gif|png))(?:\?([^#]*))?(?:#(.*))?/g;
+  const acceptedFormatsRegex =  /(?:([^:/?#]+):)?(?:([^/?#]*))?([^?#](?:jpeg|gif|png))(?:\?([^#]*))?(?:#(.*))?/g;
 
   const formValidations = {
     image: {
@@ -118,13 +118,13 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
           setLocalImageUrl={setLocalImageUrl}
           setError={setError}
           trigger={trigger}
-          error={errors.title}
+          error={errors.image}
           {...register('image', formValidations.image)}
         />
 
         <TextInput
           placeholder="Título da imagem..."
-          error={errors.image}
+          error={errors.title}
 
           {...register('title', formValidations.title)}
         />
