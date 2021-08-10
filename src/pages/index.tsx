@@ -40,6 +40,7 @@ export default function Home(): JSX.Element {
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
+    refetch
   } = useInfiniteQuery('images', fetchImages, {
     getNextPageParam: lastPage => lastPage?.after || null,
   });
@@ -56,7 +57,7 @@ export default function Home(): JSX.Element {
   }
 
   if (!isLoading && isError) {
-    return <Error />;
+    return <Error onReload={refetch} />;
   }
 
   return (

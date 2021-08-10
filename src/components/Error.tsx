@@ -1,6 +1,10 @@
 import { Button, Heading, Flex } from '@chakra-ui/react';
 
-export function Error(): JSX.Element {
+type ErrorProps = {
+  onReload: () => void;
+}
+
+export function Error({onReload}: ErrorProps): JSX.Element {
   return (
     <Flex
       justifyContent="center"
@@ -9,7 +13,7 @@ export function Error(): JSX.Element {
       flexDir="column"
     >
       <Heading>Infelizmente ocorreu um erro =(</Heading>
-      <Button py={6} onClick={() => window.location.reload()} mt={4}>
+      <Button py={6} onClick={onReload} mt={4}>
         Clique aqui para tentar novamente
       </Button>
     </Flex>
